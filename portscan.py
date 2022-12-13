@@ -6,29 +6,28 @@ class Scan(object):
         self.target = host
         self.path_file = file
         with open(self.path_file, newline='') as list:
-            if(self.path_file == 'lib/tcp-ports.csv'):
-                dict = csv.DictReader(list, fieldnames= ["Type", "Port", "Service"])
-            else:
-
+            self.dict = [*csv.DictReader(list, fieldnames= ["Type", "Port", "Service"])]
             try:
                 if self.target.replace('.', '').isdigit():
                     self.target = socket.gethostbyaddr(self.target)
-                    print(f"Host: {self.target[0]}")
+                    print(f"Host > {self.target[0]}") 
+                    #returns a list where 0 position is host name
                 else:
-                    print(f"Host: {socket.gethostbyname(self.target)}")
+                    print(f"Host > {socket.gethostbyname(self.target)}")
             except socket.herror or socket.gaierror:
                 pass
     
-
-    def tcpsc'an(self):
+    def tcpscan(self):
         whale_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        for port in self.ports:
+        print("TYPE   PORT     SERVICE")
+        for row in self.dict:
+            port = int(row['Port'])
             recv = whale_client.connect_ex((self.target, port))
             if(recv == 0):
                 try:
-                    print(f" {tcp}\n")
+                    tcp_results = next(item for item in self.dict if item["Port"] == str(port))
+                    print(f"{tcp_results.get('Type')}    {tcp_results.get('Port')}    {tcp_results.get('Service')}")
                 except socket.gaierror:
                     pass
 
-nmap = Scan('google.com')
-#nmap.tcpscan()
+
