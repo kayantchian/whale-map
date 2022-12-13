@@ -4,9 +4,12 @@ class Scan(object):
 
     def __init__(self, host, file = 'lib/tcp-ports.csv'):
         self.target = host
-        self.file = file
-        with open(self.file, newline='') as list:
-            dict = csv.DictReader(list, fieldnames= ["Type", "Port", "Service"])
+        self.path_file = file
+        with open(self.path_file, newline='') as list:
+            if(self.path_file == 'lib/tcp-ports.csv'):
+                dict = csv.DictReader(list, fieldnames= ["Type", "Port", "Service"])
+            else:
+
             try:
                 if self.target.replace('.', '').isdigit():
                     self.target = socket.gethostbyaddr(self.target)
@@ -17,7 +20,7 @@ class Scan(object):
                 pass
     
 
-    def tcpscan(self):
+    def tcpsc'an(self):
         whale_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         for port in self.ports:
             recv = whale_client.connect_ex((self.target, port))
