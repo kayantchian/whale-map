@@ -2,10 +2,11 @@ import socket, csv
 
 class Scan(object):
 
-    def __init__(self, host):
+    def __init__(self, host, file = 'lib/tcp-ports.csv'):
         self.target = host
-        with open('lib/tcp-ports.csv', newline='') as file:
-            tcp_ports = csv.reader(file, delimiter=' ', quotechar='|')
+        self.file = file
+        with open(self.file, newline='') as list:
+            dict = csv.DictReader(list, fieldnames= ["Type", "Port", "Service"])
             try:
                 if self.target.replace('.', '').isdigit():
                     self.target = socket.gethostbyaddr(self.target)
@@ -18,9 +19,7 @@ class Scan(object):
 
     def tcpscan(self):
         whale_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        for i in tcp_ports:
-            tcp = (', '.join(i))
-            port = "".join(tcp.split(",", 2)[1:2])
+        for port in self.ports:
             recv = whale_client.connect_ex((self.target, port))
             if(recv == 0):
                 try:
@@ -28,4 +27,5 @@ class Scan(object):
                 except socket.gaierror:
                     pass
 
-nmap = Scan('142.251.135.132')
+nmap = Scan('google.com')
+#nmap.tcpscan()
