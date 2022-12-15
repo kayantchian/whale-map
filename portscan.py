@@ -10,10 +10,10 @@ class Scan(object):
             try:
                 if self.target.replace('.', '').isdigit():
                     self.target = socket.gethostbyaddr(self.target)
-                    print(f"Host > {self.target[0]}") 
+                    print(f"IP > {self.target[0]}") 
                     #returns a list where 0 position is host name
                 else:
-                    print(f"Host > {socket.gethostbyname(self.target)}")
+                    print(f"Name server > {socket.gethostbyname(self.target)}")
             except socket.herror or socket.gaierror:
                 pass
     
