@@ -2,7 +2,7 @@ import socket, csv
 
 class Scan(object):
 
-    def __init__(self, host, file = 'lib/tcp-ports.csv'):
+    def __init__(self, host, file):
         self.target = host
         self.path_file = file
         with open(self.path_file, newline='') as list:

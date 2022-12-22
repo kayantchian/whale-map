@@ -1,7 +1,16 @@
 from portscan import *
-import sys
+import sys, argparse
 
 class WhaleMap(object):
+
+    def __init__(self):
+        parser=argparse.ArgumentParser(
+        prog = 'Whale Map',
+        description='A portscanning and dns enumeration',
+        epilog='by kayantchian')
+        parser.add_argument('-f', default='lib/tcp-ports.csv')
+        parser.add_argument('-h', '--help', help='[1] Port Scan\n[2] DNS Enum\n[3] Exit\n>> ')
+        args=parser.parse_args()    
 
     def main(self):
         print("""
@@ -31,4 +40,3 @@ class WhaleMap(object):
             except ValueError:
                 pass
 whale = WhaleMap()
-whale.main()
