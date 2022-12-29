@@ -28,9 +28,11 @@ class WhaleMap(object):
            There is a default csv file that contains all tcp ports and services, 
            but you can provide one as well via the command (-f), as long as it's up 
            to the same standards.
+
+           Type -p followed by site url.
         """)
-        parser.add_argument('-p', '--portscan', metavar='url',help='specify url site')
-        parser.add_argument('-f', '--file', metavar='file',default='lib/tcp-ports.csv', help="specify a csv file of ports")
+        parser.add_argument('-p', '--portscan',help='specify url site')
+        parser.add_argument('-f', '--file',default='lib/tcp-ports.csv', help="specify a csv file of ports")
         self.args=vars(parser.parse_args())
         try:
             parser.print_help()
