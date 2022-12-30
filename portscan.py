@@ -1,24 +1,17 @@
-import socket, csv
-import sys
-class Scan(object):
+import csv, socket
+from whale_client import Client
 
+class Scan(Client):
     def __init__(self, host, file):
         try:
-            self.target = host
             self.path_file = file
+            self.target = super().validatehost(self.target)
             with open(self.path_file, newline='') as list:
                 self.dict = [*csv.DictReader(list, fieldnames= ["Type", "Port", "Service"])]
-                try:
-                    if self.target.replace('.', '').isdigit():
-                        self.target = socket.gethostbyaddr(self.target)
-                        print(f"\nName server > {self.target[0]}") 
-                        #returns a list where 0 position is host name
-                    else:
-                        print(f"\nIPv4 > {socket.gethostbyname(self.target)}")
-                except socket.herror or socket.gaierror:
-                    pass
+            
         except:
-            print('\nError on args')
+            print('\n[*] Error on args')
+
     def tcpscan(self):
         whale_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         print("TYPE   PORT     SERVICE")
@@ -32,4 +25,5 @@ class Scan(object):
                 except socket.gaierror:
                     pass
 
+a = Scan("www.google.com", "lib/tcp-ports.csv")
 

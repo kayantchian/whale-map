@@ -1,4 +1,5 @@
 from portscan import *
+from whale_client import Client
 import sys, argparse
 
 class WhaleMap(object):
