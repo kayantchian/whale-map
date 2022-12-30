@@ -11,14 +11,14 @@ class Scan(object):
                 try:
                     if self.target.replace('.', '').isdigit():
                         self.target = socket.gethostbyaddr(self.target)
-                        print(f"IP > {self.target[0]}") 
+                        print(f"\nName server > {self.target[0]}") 
                         #returns a list where 0 position is host name
                     else:
-                        print(f"Name server > {socket.gethostbyname(self.target)}")
+                        print(f"\nIPv4 > {socket.gethostbyname(self.target)}")
                 except socket.herror or socket.gaierror:
                     pass
         except:
-            print('Error on args')
+            print('\nError on args')
     def tcpscan(self):
         whale_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         print("TYPE   PORT     SERVICE")
