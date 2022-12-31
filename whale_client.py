@@ -16,6 +16,7 @@ class Client():
                     host = host + ".com"
                     pass
                 print(f"\nIPv4 > {socket.gethostbyname(host)}\n")
-        except socket.herror or socket.gaierror:
+        except:
+                print("\n[*] Invalid host\n")
                 pass
         return host
