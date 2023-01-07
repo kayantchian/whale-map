@@ -1,15 +1,12 @@
-import nmap
-from whale_client import Client
+import nmap 
 
-class Scan(Client):
+class Nmap():
     def __init__(self, host):
-        try:
-            self.target = super().validatehost(self.target)
-        except:
-            print('\n[*] Error on args')
+        self.target = host
 
-    def nmap(self):
+    def scan(self):
         nm = nmap.PortScanner()
-        nm = scan(self.target)        
-a = Scan("www.google.com")
+        nm.scan(self.target, "22-443")
 
+a = Nmap("www.google.com")
+a.scan()

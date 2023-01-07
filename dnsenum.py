@@ -7,7 +7,7 @@ class Dns(Client):
         #self.file = file
         self.target = super().validatehost(host)
         #with open("brute-force.txt") as wordlist: #open the file that contains subdomains wordlist
-            #dns = wordlist.readlines()
+            #dns = wordlist.readlines()q
 
     def brutednsnum(self):
         for name in dns:
